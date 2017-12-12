@@ -23,6 +23,8 @@ public class SF_File implements Serializable {
 	private String content;
 	@Column(name = "type", nullable = true)
 	private Integer type;
+	@Column(name = "is_enable", nullable = true)
+	private Integer isEnable;
 
 	@Column(name = "gmt_create", nullable = true)
 	private Date createTime;
@@ -67,6 +69,14 @@ public class SF_File implements Serializable {
 
 	public void setType(Integer type) {
 		this.type = type;
+	}
+
+	public Integer getIsEnable() {
+		return isEnable;
+	}
+
+	public void setIsEnable(Integer isEnable) {
+		this.isEnable = isEnable;
 	}
 
 	public Date getCreateTime() {

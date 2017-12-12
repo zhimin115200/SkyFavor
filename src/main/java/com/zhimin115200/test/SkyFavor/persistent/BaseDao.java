@@ -13,7 +13,7 @@ import com.google.common.base.Preconditions;
 public class BaseDao<T extends Serializable> {
 	private Class<T> clazz;
 
-	@Resource(name = "sessionFactoryForHSPlatform")
+	@Resource(name = "sessionFactoryForSF")
 	private SessionFactory sessionFactory;
 
 	public void create(final T entity) {

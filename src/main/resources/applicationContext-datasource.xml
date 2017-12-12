@@ -26,7 +26,7 @@
 	</bean>
 
 	<!-- Hibernate SessionFactory -->
-	<bean id="sessionFactoryForHSPlatform"
+	<bean id="sessionFactoryForSF"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSourceForApplications" />
 		<!-- 支持注解 自动在指定的classpath下读取Annotation -->
@@ -56,11 +56,11 @@
 	</bean>
 
 	<!-- Transaction manager -->
-	<bean id="transactionManagerForHSPlatform"
+	<bean id="transactionManagerForSF"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactoryForHSPlatform" />
+		<property name="sessionFactory" ref="sessionFactoryForSF" />
 	</bean>
 
 	<!-- 使用annotation定义事务 -->
-	<tx:annotation-driven transaction-manager="transactionManagerForHSPlatform" />
+	<tx:annotation-driven transaction-manager="transactionManagerForSF" />
 </beans>

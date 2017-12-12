@@ -10,7 +10,7 @@
 	</appender>
 	<appender name="dailyFile" class="org.apache.log4j.DailyRollingFileAppender">
 		<!-- 输出的文件目录  -->
-		<param name="File" value="${catalina.base}/logs/chpay.log" />
+		<param name="File" value="${catalina.base}/logs/SF.log" />
 		<param name="Append" value="true" />
 		<param name="BufferSize" value="8192" />
 		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
@@ -21,7 +21,7 @@
 	</appender>
 	<!-- Rolling File -->
 	<appender name="rolling" class="org.apache.log4j.RollingFileAppender">
-		<param name="File" value="${catalina.base}/logs/chpay.log" />
+		<param name="File" value="${catalina.base}/logs/SF.log" />
 		<param name="Append" value="true" />
 		<param name="BufferSize" value="8192" />
 		<param name="MaxFileSize" value="20MB" />

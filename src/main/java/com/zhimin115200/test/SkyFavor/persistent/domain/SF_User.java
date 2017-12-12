@@ -17,8 +17,6 @@ public class SF_User implements Serializable {
 	private String email;
 	@Column(name = "password", nullable = true)
 	private String password;
-	@Column(name = "verify_code", nullable = true)
-	private String verifyCode;
 
 	@Column(name = "gmt_create", nullable = true)
 	private Date createTime;
@@ -47,14 +45,6 @@ public class SF_User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getVerifyCode() {
-		return verifyCode;
-	}
-
-	public void setVerifyCode(String verifyCode) {
-		this.verifyCode = verifyCode;
 	}
 
 	public Date getCreateTime() {

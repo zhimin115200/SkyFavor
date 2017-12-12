@@ -19,8 +19,8 @@ public class SF_Folder implements Serializable {
 	private String folderName;
 	@Column(name = "email", nullable = true)
 	private String email;
-	@Column(name = "type", nullable = true)
-	private Integer type;
+	@Column(name = "is_enable", nullable = true)
+	private Integer isEnable;
 
 	@Column(name = "gmt_create", nullable = true)
 	private Date createTime;
@@ -59,12 +59,12 @@ public class SF_Folder implements Serializable {
 		this.folderName = folderName;
 	}
 
-	public Integer getType() {
-		return type;
+	public Integer getIsEnable() {
+		return isEnable;
 	}
 
-	public void setType(Integer type) {
-		this.type = type;
+	public void setIsEnable(Integer isEnable) {
+		this.isEnable = isEnable;
 	}
 
 	public Date getCreateTime() {
