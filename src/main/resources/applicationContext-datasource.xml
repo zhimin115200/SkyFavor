@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- - Middle tier application context definition for the image database. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd">
+
+	<!-- 连接池配置 -->
+	<bean id="dataSourceForApplications" class="org.apache.commons.dbcp2.BasicDataSource"
+		destroy-method="close">
+		<!-- Connection Info -->
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- Connection Pooling Info -->
+		<property name="initialSize" value="2" />
+		<property name="maxTotal"
+			value="${database.acornhc.applications.maximumConnectionCount}" />
+		<property name="maxIdle" value="20" />
+		<property name="minIdle" value="5" />
+		<property name="maxWaitMillis" value="7000" />
+		<property name="poolPreparedStatements" value="false" />
+		<property name="defaultAutoCommit" value="false" />
+	</bean>
+
+	<!-- Hibernate SessionFactory -->
+	<bean id="sessionFactoryForHSPlatform"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSourceForApplications" />
+		<!-- 支持注解 自动在指定的classpath下读取Annotation -->
+		<property name="packagesToScan">
+			<list>
+				<value>com.zhimin115200.**.*</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.connection.release_mode">auto</prop>
+				<prop key="hibernate.connection.autocommit">false</prop>
+				<prop key="hibernate.transaction.auto_close_session">false</prop>
+				<prop key="hibernate.bytecode.use_reflection_optimizer">true</prop>
+				<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext
+				</prop>
+				<prop key="hibernate.jdbc.fetch_size">100</prop>
+				<prop key="hibernate.jdbc.batch_size">30</prop>
+				<prop key="preferredTestQuery">SELECT 1</prop>
+				<!-- <prop key="hibernate.cache.use_second_level_cache">true</prop> <prop 
+					key="hibernate.cache.use_query_cache">true</prop> <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.EhCacheRegionFactory</prop> -->
+			</props>
+		</property>
+	</bean>
+
+	<!-- Transaction manager -->
+	<bean id="transactionManagerForHSPlatform"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactoryForHSPlatform" />
+	</bean>
+
+	<!-- 使用annotation定义事务 -->
+	<tx:annotation-driven transaction-manager="transactionManagerForHSPlatform" />
+</beans>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee  
+	 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<!-- 指定Spring配置文件位置 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath*:/applicationContext.xml,/**/applicationContext-*.xml,/**/applicationContext_*.xml,classpath*:conf/**/spring-context*.xml</param-value>
+	</context-param>
+	<!-- 集中配置管理 -->
+	<context-param>
+		<param-name>serverConfigLocation</param-name>
+		<param-value>WEB-INF/classes/config-server.properties</param-value>
+	</context-param>
+	<context-param>
+		<param-name>genericConfigLocation</param-name>
+		<param-value>WEB-INF/classes/generic-config.properties</param-value>
+	</context-param>
+
+	<!-- Spring Web容器加载监听器 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- 字符集转换过滤器 -->
+	<filter>
+		<filter-name>encoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+
+	<!-- 请求字符集 -->
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>*.html</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>*.ajax</url-pattern>
+	</filter-mapping>
+
+	<!-- Jersey REST -->
+	<servlet>
+		<servlet-name>Jersey REST Service</servlet-name>
+		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-value>com.zhimin115200.test.SkyFavor</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Jersey REST Service</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+</web-app>
