@@ -21,8 +21,8 @@ public class SF_File implements Serializable {
 
 	@Column(name = "content", nullable = true)
 	private String content;
-	@Column(name = "type", nullable = true)
-	private Integer type;
+	@Column(name = "file_type", nullable = true)
+	private Integer fileType;
 	@Column(name = "is_enable", nullable = true)
 	private Integer isEnable;
 
@@ -63,12 +63,12 @@ public class SF_File implements Serializable {
 		this.content = content;
 	}
 
-	public Integer getType() {
-		return type;
+	public Integer getFileType() {
+		return fileType;
 	}
 
-	public void setType(Integer type) {
-		this.type = type;
+	public void setFileType(Integer fileType) {
+		this.fileType = fileType;
 	}
 
 	public Integer getIsEnable() {

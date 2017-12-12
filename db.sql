@@ -12,7 +12,7 @@ CREATE TABLE `sf_mail` (
   `email_id` varchar(32) NOT NULL DEFAULT '' COMMENT '发送id',
   `email` varchar(64) NOT NULL DEFAULT '' COMMENT '邮箱账号',
   `content` TEXT NOT NULL COMMENT '邮件内容',
-  `type` int(2) NOT NULL COMMENT '内容类型：1.验证码，2普通内容',
+  `mail_type` int(2) NOT NULL COMMENT '内容类型：1.验证码，2普通内容',
   `gmt_modify` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `gmt_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`)
@@ -34,7 +34,7 @@ CREATE TABLE `sf_file` (
   `file_id` varchar(32) NOT NULL DEFAULT '' COMMENT '文件id',
   `folder_id` varchar(64) NOT NULL COMMENT '文件夹id',
 	`content` TEXT NOT NULL COMMENT '文件内容',
-	`type` int(2) NOT NULL COMMENT '文件类型：1文字，2链接，3',
+	`file_type` int(2) NOT NULL COMMENT '文件类型：1文字，2链接，3',
 	`is_enable` int(2) NOT NULL COMMENT '使能0：已删除，1未删除',
   `gmt_modify` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `gmt_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',

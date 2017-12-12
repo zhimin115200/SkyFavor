@@ -2,7 +2,6 @@ package com.zhimin115200.test.SkyFavor.service.impl;
 
 import com.zhimin115200.test.SkyFavor.common.Constant;
 import com.zhimin115200.test.SkyFavor.common.exception.UserException;
-import com.zhimin115200.test.SkyFavor.common.response.ResponseConstant;
 import com.zhimin115200.test.SkyFavor.common.util.Convert;
 import com.zhimin115200.test.SkyFavor.model.UserDto;
 import com.zhimin115200.test.SkyFavor.persistent.UserDao;
@@ -48,7 +47,9 @@ public class UserServiceImpl implements UserService {
 			SF_User user = new SF_User();
 			user.setEmail(email);
 			user.setPassword(password);
-			userDao.add(user);
+			if(!userDao.add(user)){
+				throw new UserException(Constant.CREATE_ERROR);
+			}
 		}else{
 			throw new UserException(Constant.ACCOUNT_IS_EXIST);
 		}

@@ -1,16 +1,10 @@
 package com.zhimin115200.test.SkyFavor.service.impl;
 
-import com.zhimin115200.test.SkyFavor.common.exception.UserException;
-import com.zhimin115200.test.SkyFavor.common.response.ResponseConstant;
 import com.zhimin115200.test.SkyFavor.common.util.Convert;
 import com.zhimin115200.test.SkyFavor.model.FileDto;
 import com.zhimin115200.test.SkyFavor.model.FolderDto;
-import com.zhimin115200.test.SkyFavor.model.UserDto;
-import com.zhimin115200.test.SkyFavor.persistent.FileDao;
 import com.zhimin115200.test.SkyFavor.persistent.FolderDao;
-import com.zhimin115200.test.SkyFavor.persistent.UserDao;
 import com.zhimin115200.test.SkyFavor.persistent.domain.SF_Folder;
-import com.zhimin115200.test.SkyFavor.persistent.domain.SF_User;
 import com.zhimin115200.test.SkyFavor.service.FileService;
 import com.zhimin115200.test.SkyFavor.service.FolderService;
 import com.zhimin115200.test.SkyFavor.service.UserService;

@@ -72,13 +72,14 @@ public class MailDaoImpl extends BaseDao<SF_Mail> implements MailDao {
 	public SF_Mail getLatest(String mail, Integer type) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("from SF_Mail where 1=1 ");
-		sb.append(" and mail = :mail ");
-		sb.append(" and type = :type ");
-		sb.append(" order by gmtCreate desc limit 1 ");
+		sb.append(" and email = :email ");
+		sb.append(" and mailType = :mailType ");
+		sb.append(" order by createTime desc");
 		Session session = getCurrentSession();
 		Query query = session.createQuery(sb.toString());
-		query.setParameter("mail", mail);
-		query.setParameter("type", type);
+		query.setMaxResults(1);
+		query.setParameter("email", mail);
+		query.setParameter("mailType", type);
 		return (SF_Mail)query.uniqueResult();
 	}
 }

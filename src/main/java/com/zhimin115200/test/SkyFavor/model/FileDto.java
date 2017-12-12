@@ -10,7 +10,7 @@ public class FileDto {
     private String folderId;
 
     private String content;
-    private Integer type;
+    private Integer fileType;
     private Integer isEnable;
 
     private Date createTime;
@@ -48,12 +48,12 @@ public class FileDto {
         this.content = content;
     }
 
-    public Integer getType() {
-        return type;
+    public Integer getFileType() {
+        return fileType;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setFileType(Integer fileType) {
+        this.fileType = fileType;
     }
 
     public Integer getIsEnable() {

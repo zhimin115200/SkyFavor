@@ -48,7 +48,7 @@ public class Convert {
         dto.setFileId(file.getFileId());
         dto.setFolderId(file.getFolderId());
         dto.setId(file.getId());
-        dto.setType(file.getType());
+        dto.setFileType(file.getFileType());
         dto.setUpdateTime(file.getUpdateTime());
         return dto;
     }
@@ -60,7 +60,7 @@ public class Convert {
         file.setFileId(dto.getFileId());
         file.setFolderId(dto.getFolderId());
         file.setId(dto.getId());
-        file.setType(dto.getType());
+        file.setFileType(dto.getFileType());
         file.setUpdateTime(dto.getUpdateTime());
         return file;
     }

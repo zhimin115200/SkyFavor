@@ -1,7 +1,6 @@
 package com.zhimin115200.test.SkyFavor.service;
 
 import com.zhimin115200.test.SkyFavor.model.FileDto;
-import com.zhimin115200.test.SkyFavor.model.FolderDto;
 
 import java.util.List;
 

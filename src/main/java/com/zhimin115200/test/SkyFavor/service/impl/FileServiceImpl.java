@@ -2,14 +2,9 @@ package com.zhimin115200.test.SkyFavor.service.impl;
 
 import com.zhimin115200.test.SkyFavor.common.util.Convert;
 import com.zhimin115200.test.SkyFavor.model.FileDto;
-import com.zhimin115200.test.SkyFavor.model.FolderDto;
 import com.zhimin115200.test.SkyFavor.persistent.FileDao;
-import com.zhimin115200.test.SkyFavor.persistent.FolderDao;
 import com.zhimin115200.test.SkyFavor.persistent.domain.SF_File;
-import com.zhimin115200.test.SkyFavor.persistent.domain.SF_Folder;
-import com.zhimin115200.test.SkyFavor.persistent.domain.SF_Mail;
 import com.zhimin115200.test.SkyFavor.service.FileService;
-import com.zhimin115200.test.SkyFavor.service.FolderService;
 import com.zhimin115200.test.SkyFavor.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
@@ -35,7 +30,7 @@ public class FileServiceImpl implements FileService {
 		file.setContent(content);
 		file.setFileId(UUID.randomUUID().toString().replace("-", ""));
 		file.setFolderId(folderId);
-		file.setType(1);
+		file.setFileType(1);
 		file.setIsEnable(1);
 		return fileDao.add(file);
 	}

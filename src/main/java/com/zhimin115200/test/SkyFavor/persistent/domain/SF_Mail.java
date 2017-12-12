@@ -18,8 +18,8 @@ public class SF_Mail implements Serializable {
 	private String email;
 	@Column(name = "content", nullable = true)
 	private String content;
-	@Column(name = "type", nullable = true)
-	private Integer type;
+	@Column(name = "mail_type", nullable = true)
+	private Integer mailType;
 
 	@Column(name = "gmt_create", nullable = true)
 	private Date createTime;
@@ -50,12 +50,12 @@ public class SF_Mail implements Serializable {
 		this.content = content;
 	}
 
-	public Integer getType() {
-		return type;
+	public Integer getMailType() {
+		return mailType;
 	}
 
-	public void setType(Integer type) {
-		this.type = type;
+	public void setMailType(Integer mailType) {
+		this.mailType = mailType;
 	}
 
 	public String getEmailId() {

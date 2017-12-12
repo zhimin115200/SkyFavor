@@ -8,15 +8,6 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath*:/applicationContext.xml,/**/applicationContext-*.xml,/**/applicationContext_*.xml,classpath*:conf/**/spring-context*.xml</param-value>
 	</context-param>
-	<!-- 集中配置管理 -->
-	<context-param>
-		<param-name>serverConfigLocation</param-name>
-		<param-value>WEB-INF/classes/config-server.properties</param-value>
-	</context-param>
-	<context-param>
-		<param-name>genericConfigLocation</param-name>
-		<param-value>WEB-INF/classes/generic-config.properties</param-value>
-	</context-param>
 
 	<!-- Spring Web容器加载监听器 -->
 	<listener>
