@@ -27,6 +27,7 @@ public class FileServiceImpl implements FileService {
 	@Override
 	public boolean add(String folderId, String fileName, String content) {
 		SF_File file = new SF_File();
+		file.setFileName(fileName);
 		file.setContent(content);
 		file.setFileId(UUID.randomUUID().toString().replace("-", ""));
 		file.setFolderId(folderId);
@@ -46,15 +47,20 @@ public class FileServiceImpl implements FileService {
 	@Transactional(readOnly = true)
 	public FileDto get(String fileId) {
 		SF_File file = fileDao.get(fileId);
-		return Convert.toDto(file);
+		if(file!=null){
+			return Convert.toDto(file);
+		}else{
+			return null;
+		}
 	}
 
 	@Override
-	public boolean modify(FileDto fileDto) {
-		String fileId = fileDto.getFileId();
+	public boolean modify(String fileId,String fileName,String content) {
 		if(StringUtils.isNotEmpty(fileId)
 				&&get(fileId)!=null){
-			SF_File file = Convert.toDto(fileDto);
+			SF_File file = fileDao.get(fileId);
+			file.setFileName(fileName);
+			file.setContent(content);
 			return fileDao.modify(file);
 		}
 		return false;

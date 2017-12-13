@@ -1,28 +1,22 @@
 package com.zhimin115200.test.SkyFavor.model;
 
-import javax.persistence.Column;
+import java.io.Serializable;
 import java.util.Date;
 
-public class FileDto {
-    protected long id;
+public class FileDto implements Serializable{
+
+    private static final long serialVersionUID = -5338093617913709963L;
 
     private String fileId;
     private String folderId;
 
+    private String fileName;
     private String content;
     private Integer fileType;
     private Integer isEnable;
 
     private Date createTime;
     private Date updateTime;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getFileId() {
         return fileId;
@@ -74,6 +68,14 @@ public class FileDto {
 
     public Date getUpdateTime() {
         return updateTime;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public void setUpdateTime(Date updateTime) {

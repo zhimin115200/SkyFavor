@@ -3,6 +3,8 @@ package com.zhimin115200.test.SkyFavor.persistent.impl;
 import com.zhimin115200.test.SkyFavor.persistent.BaseDao;
 import com.zhimin115200.test.SkyFavor.persistent.UserDao;
 import com.zhimin115200.test.SkyFavor.persistent.domain.SF_User;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -12,6 +14,7 @@ import java.util.List;
 @Repository
 public class UserDaoImpl extends BaseDao<SF_User> implements UserDao {
 
+	private static Log logger = LogFactory.getLog(UserDaoImpl.class);
 	public UserDaoImpl() {
         super();
         setClazz(SF_User.class);
@@ -33,6 +36,7 @@ public class UserDaoImpl extends BaseDao<SF_User> implements UserDao {
 		try{
 			this.create(user);
 		}catch(Exception e){
+			logger.error("add user error:"+e.getMessage(),e);
 			return false;
 		}
 		return true;
@@ -45,6 +49,7 @@ public class UserDaoImpl extends BaseDao<SF_User> implements UserDao {
 			try{
 				this.delete(user);
 			}catch(Exception e){
+				logger.error("delete user error:"+e.getMessage(),e);
 				return false;
 			}
 		}
@@ -56,6 +61,7 @@ public class UserDaoImpl extends BaseDao<SF_User> implements UserDao {
 		try{
 			this.update(user);
 		}catch(Exception e){
+			logger.error("modify user error:"+e.getMessage(),e);
 			return false;
 		}
 		return true;

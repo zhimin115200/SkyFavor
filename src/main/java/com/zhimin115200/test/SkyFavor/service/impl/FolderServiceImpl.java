@@ -58,15 +58,19 @@ public class FolderServiceImpl implements FolderService {
 	@Transactional(readOnly = true)
 	public FolderDto get(String folderId) {
 		SF_Folder folder = folderDao.get(folderId);
-		return Convert.toDto(folder);
+		if(folder!=null){
+			return Convert.toDto(folder);
+		}else{
+			return null;
+		}
 	}
 
 	@Override
-	public boolean modify(FolderDto folderDto) {
-		String folderId = folderDto.getFolderId();
+	public boolean modify(String folderId,String name) {
 		if(StringUtils.isNotEmpty(folderId)
 				&&get(folderId)!=null){
-			SF_Folder folder = Convert.toDto(folderDto);
+			SF_Folder folder = folderDao.get(folderId);
+			folder.setFolderName(name);
 			return folderDao.modify(folder);
 		}
 		return false;

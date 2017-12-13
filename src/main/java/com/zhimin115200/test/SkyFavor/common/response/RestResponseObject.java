@@ -1,5 +1,8 @@
 package com.zhimin115200.test.SkyFavor.common.response;
 
+
+import com.alibaba.fastjson.JSONObject;
+
 import java.io.Serializable;
 
 
@@ -16,7 +19,17 @@ public class RestResponseObject extends BasicResult {
     }
 
     public Serializable getData() {
-        return data;
+        if (data != null) {
+            JSONObject jsonObject;
+            try {
+                jsonObject = JSONObject.parseObject(JSONObject.toJSONString(data));
+            } catch (Exception e) {
+                return data;
+            }
+            return jsonObject;
+        } else {
+            return null;
+        }
     }
 
     public void setData(Serializable data) {

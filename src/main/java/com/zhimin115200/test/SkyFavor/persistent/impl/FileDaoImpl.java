@@ -3,6 +3,8 @@ package com.zhimin115200.test.SkyFavor.persistent.impl;
 import com.zhimin115200.test.SkyFavor.persistent.BaseDao;
 import com.zhimin115200.test.SkyFavor.persistent.FileDao;
 import com.zhimin115200.test.SkyFavor.persistent.domain.SF_File;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -11,6 +13,8 @@ import java.util.List;
 
 @Repository
 public class FileDaoImpl extends BaseDao<SF_File> implements FileDao {
+
+	private static Log logger = LogFactory.getLog(FileDaoImpl.class);
 
 	public FileDaoImpl() {
         super();
@@ -33,6 +37,7 @@ public class FileDaoImpl extends BaseDao<SF_File> implements FileDao {
 		try{
 			this.create(file);
 		}catch(Exception e){
+			logger.error("add file error:"+e.getMessage(),e);
 			return false;
 		}
 		return true;
@@ -45,6 +50,7 @@ public class FileDaoImpl extends BaseDao<SF_File> implements FileDao {
 			try{
 				this.delete(file);
 			}catch(Exception e){
+				logger.error("delete file error:"+e.getMessage(),e);
 				return false;
 			}
 		}
@@ -56,6 +62,7 @@ public class FileDaoImpl extends BaseDao<SF_File> implements FileDao {
 		try{
 			this.update(file);
 		}catch(Exception e){
+			logger.error("update file error:"+e.getMessage(),e);
 			return false;
 		}
 		return true;
@@ -66,6 +73,7 @@ public class FileDaoImpl extends BaseDao<SF_File> implements FileDao {
 		StringBuffer sb = new StringBuffer();
 		sb.append("from SF_File where 1=1 ");
 		sb.append(" and folderId = :folderId ");
+		sb.append(" and isEnable = 1 ");
 		Session session = getCurrentSession();
 		Query query = session.createQuery(sb.toString());
 		query.setParameter("folderId", folderId);

@@ -3,6 +3,8 @@ package com.zhimin115200.test.SkyFavor.persistent.impl;
 import com.zhimin115200.test.SkyFavor.persistent.BaseDao;
 import com.zhimin115200.test.SkyFavor.persistent.FolderDao;
 import com.zhimin115200.test.SkyFavor.persistent.domain.SF_Folder;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -12,6 +14,7 @@ import java.util.List;
 @Repository
 public class FolderDaoImpl extends BaseDao<SF_Folder> implements FolderDao {
 
+	private static Log logger = LogFactory.getLog(FolderDaoImpl.class);
 	public FolderDaoImpl() {
         super();
         setClazz(SF_Folder.class);
@@ -33,6 +36,7 @@ public class FolderDaoImpl extends BaseDao<SF_Folder> implements FolderDao {
 		try{
 			this.create(folder);
 		}catch(Exception e){
+			logger.error("add foler error:"+e.getMessage(),e);
 			return false;
 		}
 		return true;
@@ -45,6 +49,7 @@ public class FolderDaoImpl extends BaseDao<SF_Folder> implements FolderDao {
 			try{
 				this.delete(folder);
 			}catch(Exception e){
+				logger.error("delete foler error:"+e.getMessage(),e);
 				return false;
 			}
 		}
@@ -56,6 +61,7 @@ public class FolderDaoImpl extends BaseDao<SF_Folder> implements FolderDao {
 		try{
 			this.update(folder);
 		}catch(Exception e){
+			logger.error("modify foler error:"+e.getMessage(),e);
 			return false;
 		}
 		return true;
@@ -66,6 +72,7 @@ public class FolderDaoImpl extends BaseDao<SF_Folder> implements FolderDao {
 		StringBuffer sb = new StringBuffer();
 		sb.append("from SF_Folder where 1=1 ");
 		sb.append(" and email = :email ");
+		sb.append(" and isEnable = 1 ");
 		Session session = getCurrentSession();
 		Query query = session.createQuery(sb.toString());
 		query.setParameter("email", email);

@@ -19,6 +19,8 @@ public class SF_File implements Serializable {
 	@Column(name = "folder_id", nullable = true)
 	private String folderId;
 
+	@Column(name = "file_name", nullable = true)
+	private String fileName;
 	@Column(name = "content", nullable = true)
 	private String content;
 	@Column(name = "file_type", nullable = true)
@@ -57,6 +59,14 @@ public class SF_File implements Serializable {
 
 	public String getContent() {
 		return content;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public void setContent(String content) {

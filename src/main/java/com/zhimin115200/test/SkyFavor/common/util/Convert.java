@@ -43,11 +43,12 @@ public class Convert {
 
     public static FileDto toDto(SF_File file){
         FileDto dto = new FileDto();
+        dto.setFileName(file.getFileName());
         dto.setContent(file.getContent());
         dto.setCreateTime(file.getCreateTime());
         dto.setFileId(file.getFileId());
         dto.setFolderId(file.getFolderId());
-        dto.setId(file.getId());
+        dto.setIsEnable(file.getIsEnable());
         dto.setFileType(file.getFileType());
         dto.setUpdateTime(file.getUpdateTime());
         return dto;
@@ -56,10 +57,11 @@ public class Convert {
     public static SF_File toDto(FileDto dto){
         SF_File file = new SF_File();
         file.setContent(dto.getContent());
+        file.setFileName(dto.getFileName());
         file.setCreateTime(dto.getCreateTime());
         file.setFileId(dto.getFileId());
         file.setFolderId(dto.getFolderId());
-        file.setId(dto.getId());
+        file.setIsEnable(dto.getIsEnable());
         file.setFileType(dto.getFileType());
         file.setUpdateTime(dto.getUpdateTime());
         return file;

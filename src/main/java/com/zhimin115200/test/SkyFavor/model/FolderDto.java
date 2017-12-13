@@ -1,9 +1,9 @@
 package com.zhimin115200.test.SkyFavor.model;
 
-import javax.persistence.Column;
+import java.io.Serializable;
 import java.util.Date;
 
-public class FolderDto {
+public class FolderDto implements Serializable{
     protected long id;
 
     private String folderId;

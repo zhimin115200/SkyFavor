@@ -3,6 +3,8 @@ package com.zhimin115200.test.SkyFavor.persistent.impl;
 import com.zhimin115200.test.SkyFavor.persistent.BaseDao;
 import com.zhimin115200.test.SkyFavor.persistent.MailDao;
 import com.zhimin115200.test.SkyFavor.persistent.domain.SF_Mail;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
@@ -12,6 +14,7 @@ import java.util.List;
 @Repository
 public class MailDaoImpl extends BaseDao<SF_Mail> implements MailDao {
 
+	private static Log logger = LogFactory.getLog(MailDaoImpl.class);
 	public MailDaoImpl() {
         super();
         setClazz(SF_Mail.class);
@@ -34,6 +37,7 @@ public class MailDaoImpl extends BaseDao<SF_Mail> implements MailDao {
 		try{
 			this.create(mail);
 		}catch(Exception e){
+			logger.error("add mail error:"+e.getMessage(),e);
 			return false;
 		}
 		return true;
@@ -46,6 +50,7 @@ public class MailDaoImpl extends BaseDao<SF_Mail> implements MailDao {
 			try{
 				this.delete(mail);
 			}catch(Exception e){
+				logger.error("delete mail error:"+e.getMessage(),e);
 				return false;
 			}
 		}
@@ -57,6 +62,7 @@ public class MailDaoImpl extends BaseDao<SF_Mail> implements MailDao {
 		try{
 			this.update(mail);
 		}catch(Exception e){
+			logger.error("modify mail error:"+e.getMessage(),e);
 			return false;
 		}
 		return true;

@@ -33,6 +33,7 @@ CREATE TABLE `sf_file` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `file_id` varchar(32) NOT NULL DEFAULT '' COMMENT '文件id',
   `folder_id` varchar(64) NOT NULL COMMENT '文件夹id',
+  `file_name` TEXT NOT NULL COMMENT '文件名称',
 	`content` TEXT NOT NULL COMMENT '文件内容',
 	`file_type` int(2) NOT NULL COMMENT '文件类型：1文字，2链接，3',
 	`is_enable` int(2) NOT NULL COMMENT '使能0：已删除，1未删除',
