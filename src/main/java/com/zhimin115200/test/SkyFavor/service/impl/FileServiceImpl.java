@@ -31,6 +31,7 @@ public class FileServiceImpl implements FileService {
 		file.setContent(content);
 		file.setFileId(UUID.randomUUID().toString().replace("-", ""));
 		file.setFolderId(folderId);
+		file.setVisitAccount(0);
 		file.setFileType(1);
 		file.setIsEnable(1);
 		return fileDao.add(file);
@@ -75,5 +76,16 @@ public class FileServiceImpl implements FileService {
 			dtos.add(Convert.toDto(file));
 		}
 		return dtos;
+	}
+
+	@Override
+	public boolean visitPlus(String fileId) {
+		if(StringUtils.isNotEmpty(fileId)
+				&&get(fileId)!=null){
+			SF_File file = fileDao.get(fileId);
+			file.setVisitAccount(file.getVisitAccount()+1);
+			return fileDao.modify(file);
+		}
+		return false;
 	}
 }

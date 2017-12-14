@@ -134,4 +134,25 @@ public class FileResource {
 		responseObject.setMsg(ResponseConstant.SUCCESS_MSG_BASIC);
 		return responseObject;
 	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/visitPlus/{fileId}")
+	public RestResponseObject visitPlus(@PathParam("fileId") String fileId) {
+		logger.info("visitPlus:"+fileId);
+		RestResponseObject responseObject = new RestResponseObject();
+		if(StringUtils.isEmpty(fileId)){
+			responseObject.setCode(ResponseConstant.ERROR_CODE);
+			responseObject.setMsg(Constant.PARAM_NOT_NULL);
+		}
+		if(fileService.visitPlus(fileId)){
+			responseObject.setCode(ResponseConstant.SUCCESS_CODE);
+			responseObject.setMsg(ResponseConstant.SUCCESS_MSG_BASIC);
+		}else{
+			responseObject.setCode(ResponseConstant.ERROR_CODE);
+			responseObject.setMsg(ResponseConstant.ERROR_MSG_BASIC);
+		}
+
+		return responseObject;
+	}
 }

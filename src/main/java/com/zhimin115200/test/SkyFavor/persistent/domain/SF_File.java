@@ -23,6 +23,9 @@ public class SF_File implements Serializable {
 	private String fileName;
 	@Column(name = "content", nullable = true)
 	private String content;
+
+	@Column(name = "visit_account", nullable = true)
+	private Integer visitAccount;
 	@Column(name = "file_type", nullable = true)
 	private Integer fileType;
 	@Column(name = "is_enable", nullable = true)
@@ -103,5 +106,13 @@ public class SF_File implements Serializable {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public Integer getVisitAccount() {
+		return visitAccount;
+	}
+
+	public void setVisitAccount(Integer visitAccount) {
+		this.visitAccount = visitAccount;
 	}
 }

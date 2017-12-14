@@ -9,5 +9,6 @@ public interface FileService {
 	boolean delete(String fileId);
 	FileDto get(String fileId);
 	boolean modify(String fileId,String fileName,String content);
+	boolean visitPlus(String fileId);
 	List<FileDto> getAll(String folderId);
 }

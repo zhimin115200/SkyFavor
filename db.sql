@@ -35,6 +35,7 @@ CREATE TABLE `sf_file` (
   `folder_id` varchar(64) NOT NULL COMMENT '文件夹id',
   `file_name` TEXT NOT NULL COMMENT '文件名称',
 	`content` TEXT NOT NULL COMMENT '文件内容',
+	`visit_account` int(4) NOT NULL COMMENT '浏览次数',
 	`file_type` int(2) NOT NULL COMMENT '文件类型：1文字，2链接，3',
 	`is_enable` int(2) NOT NULL COMMENT '使能0：已删除，1未删除',
   `gmt_modify` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',

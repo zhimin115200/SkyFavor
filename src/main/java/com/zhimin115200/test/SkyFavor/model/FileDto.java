@@ -12,6 +12,7 @@ public class FileDto implements Serializable{
 
     private String fileName;
     private String content;
+    private Integer visitAccount;
     private Integer fileType;
     private Integer isEnable;
 
@@ -80,5 +81,13 @@ public class FileDto implements Serializable{
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getVisitAccount() {
+        return visitAccount;
+    }
+
+    public void setVisitAccount(Integer visitAccount) {
+        this.visitAccount = visitAccount;
     }
 }
