@@ -51,6 +51,7 @@ public class Convert {
         dto.setIsEnable(file.getIsEnable());
         dto.setFileType(file.getFileType());
         dto.setUpdateTime(file.getUpdateTime());
+        dto.setVisitAccount(file.getVisitAccount());
         return dto;
     }
 
