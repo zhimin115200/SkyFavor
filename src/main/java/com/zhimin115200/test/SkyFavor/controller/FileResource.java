@@ -2,13 +2,11 @@ package com.zhimin115200.test.SkyFavor.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.zhimin115200.test.SkyFavor.common.Constant;
-import com.zhimin115200.test.SkyFavor.common.exception.UserException;
 import com.zhimin115200.test.SkyFavor.common.response.ResponseConstant;
 import com.zhimin115200.test.SkyFavor.common.response.RestResponseObject;
+import com.zhimin115200.test.SkyFavor.common.util.Base64Util;
 import com.zhimin115200.test.SkyFavor.model.FileDto;
 import com.zhimin115200.test.SkyFavor.service.FileService;
-import com.zhimin115200.test.SkyFavor.service.MailService;
-import com.zhimin115200.test.SkyFavor.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -36,6 +34,8 @@ public class FileResource {
 	@Path("/add/{folderId}/{fileName}/{content}/{type}")
 	public RestResponseObject add(@PathParam("folderId") String folderId, @PathParam("fileName") String fileName
 	,@PathParam("content") String content, @PathParam("type") Integer type) {
+		fileName = Base64Util.decode(fileName);
+		content = Base64Util.decode(content);
 		logger.info("add:"+folderId+","+fileName+","+content+","+type);
 		RestResponseObject responseObject = new RestResponseObject();
 		if(StringUtils.isEmpty(folderId)
@@ -82,6 +82,8 @@ public class FileResource {
 	@Path("/modify/{fileId}/{fileName}/{content}")
 	public RestResponseObject modify(@PathParam("fileId") String fileId,@PathParam("fileName") String fileName
 			,@PathParam("content") String content) {
+		fileName = Base64Util.decode(fileName);
+		content = Base64Util.decode(content);
 		logger.info("modify:"+fileId+","+fileName+","+content);
 		RestResponseObject responseObject = new RestResponseObject();
 		if(StringUtils.isEmpty(fileId)

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.zhimin115200.test.SkyFavor.common.Constant;
 import com.zhimin115200.test.SkyFavor.common.response.ResponseConstant;
 import com.zhimin115200.test.SkyFavor.common.response.RestResponseObject;
+import com.zhimin115200.test.SkyFavor.common.util.Base64Util;
 import com.zhimin115200.test.SkyFavor.model.FolderDto;
 import com.zhimin115200.test.SkyFavor.service.FolderService;
 import org.apache.commons.lang.StringUtils;
@@ -32,6 +33,7 @@ public class FolderResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/add/{email}/{folderName}")
 	public RestResponseObject add(@PathParam("email") String email, @PathParam("folderName") String folderName) {
+		folderName = Base64Util.decode(folderName);
 		logger.info("add:"+email+","+folderName);
 		RestResponseObject responseObject = new RestResponseObject();
 		if(StringUtils.isEmpty(email)
@@ -75,6 +77,7 @@ public class FolderResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/modify/{folderId}/{folderName}")
 	public RestResponseObject modify(@PathParam("folderId") String folderId,@PathParam("folderName") String folderName) {
+		folderName = Base64Util.decode(folderName);
 		logger.info("modify:"+folderId+","+folderName);
 		RestResponseObject responseObject = new RestResponseObject();
 		if(StringUtils.isEmpty(folderId)
