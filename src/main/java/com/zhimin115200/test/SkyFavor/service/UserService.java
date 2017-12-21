@@ -7,5 +7,6 @@ public interface UserService {
 	boolean validateAccount(String email,String password);
 	boolean isExist(String email);
 	void createAccount(String email,String password) throws UserException;
+	void resetPass(String email,String password) throws UserException;
 	UserDto getUser(String email);
 }

@@ -7,6 +7,15 @@ CREATE TABLE `sf_user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='sf_user用户';
 
+CREATE TABLE `sf_user_token` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `email` varchar(64) NOT NULL DEFAULT '' COMMENT '邮箱账号',
+  `token` varchar(32) NOT NULL COMMENT 'token',
+  `gmt_modify` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `gmt_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='sf_user_token令牌';
+
 CREATE TABLE `sf_mail` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `email_id` varchar(32) NOT NULL DEFAULT '' COMMENT '发送id',

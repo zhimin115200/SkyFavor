@@ -12,10 +12,6 @@ public class Convert {
     public static UserDto toDto(SF_User user){
         UserDto dto = new UserDto();
         dto.setEmail(user.getEmail());
-//        dto.setPassword(user.getPassword());
-        dto.setId(user.getId());
-        dto.setCreateTime(user.getCreateTime());
-        dto.setUpdateTime(user.getUpdateTime());
         return dto;
     }
 

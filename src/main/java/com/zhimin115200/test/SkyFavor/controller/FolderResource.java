@@ -5,18 +5,19 @@ import com.zhimin115200.test.SkyFavor.common.Constant;
 import com.zhimin115200.test.SkyFavor.common.response.ResponseConstant;
 import com.zhimin115200.test.SkyFavor.common.response.RestResponseObject;
 import com.zhimin115200.test.SkyFavor.common.util.Base64Util;
+import com.zhimin115200.test.SkyFavor.common.util.validate.ValidationResult;
+import com.zhimin115200.test.SkyFavor.common.util.validate.ValidationUtil;
+import com.zhimin115200.test.SkyFavor.entity.FolderEntity;
 import com.zhimin115200.test.SkyFavor.model.FolderDto;
 import com.zhimin115200.test.SkyFavor.service.FolderService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -29,18 +30,22 @@ public class FolderResource {
 	@Resource
 	private FolderService folderService;
 
-	@GET
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/add/{email}/{folderName}")
-	public RestResponseObject add(@PathParam("email") String email, @PathParam("folderName") String folderName) {
-		folderName = Base64Util.decode(folderName);
-		logger.info("add:"+email+","+folderName);
+	@Path("/add")
+	public RestResponseObject add(@RequestBody FolderEntity folderEntity) {
+		logger.info("add:"+folderEntity);
 		RestResponseObject responseObject = new RestResponseObject();
-		if(StringUtils.isEmpty(email)
-				||StringUtils.isEmpty(folderName)){
+		ValidationResult validateResult = ValidationUtil.validateEntity(folderEntity);
+		if (validateResult.isHasErrors()) {
+			logger.info("isHasErrors:" + validateResult.getErrorMsg());
 			responseObject.setCode(ResponseConstant.ERROR_CODE);
-			responseObject.setMsg(Constant.PARAM_NOT_NULL);
+			responseObject.setMsg(Constant.PARAM_ERROR);
+			return responseObject;
 		}
+		String email = folderEntity.getEmail();
+		String folderName = folderEntity.getFolderName();
 		if(folderService.add(email,folderName)){
 			responseObject.setCode(ResponseConstant.SUCCESS_CODE);
 			responseObject.setMsg(ResponseConstant.SUCCESS_MSG_BASIC);
@@ -60,7 +65,8 @@ public class FolderResource {
 		RestResponseObject responseObject = new RestResponseObject();
 		if(StringUtils.isEmpty(folderId)){
 			responseObject.setCode(ResponseConstant.ERROR_CODE);
-			responseObject.setMsg(Constant.PARAM_NOT_NULL);
+			responseObject.setMsg(Constant.PARAM_ERROR);
+			return responseObject;
 		}
 		if(folderService.delete(folderId)){
 			responseObject.setCode(ResponseConstant.SUCCESS_CODE);
@@ -73,18 +79,21 @@ public class FolderResource {
 		return responseObject;
 	}
 
-	@GET
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/modify/{folderId}/{folderName}")
-	public RestResponseObject modify(@PathParam("folderId") String folderId,@PathParam("folderName") String folderName) {
-		folderName = Base64Util.decode(folderName);
-		logger.info("modify:"+folderId+","+folderName);
+	@Path("/modify/{folderId}")
+	public RestResponseObject modify(@PathParam("folderId") String folderId,@RequestBody FolderEntity folderEntity) {
+		logger.info("modify:"+folderId+","+folderEntity);
 		RestResponseObject responseObject = new RestResponseObject();
-		if(StringUtils.isEmpty(folderId)
-				||StringUtils.isEmpty(folderName)){
+		ValidationResult validateResult = ValidationUtil.validateEntity(folderEntity);
+		if (validateResult.isHasErrors()) {
+			logger.info("isHasErrors:" + validateResult.getErrorMsg());
 			responseObject.setCode(ResponseConstant.ERROR_CODE);
-			responseObject.setMsg(Constant.PARAM_NOT_NULL);
+			responseObject.setMsg(Constant.PARAM_ERROR);
+			return responseObject;
 		}
+		String folderName = folderEntity.getFolderName();
 		if(folderService.modify(folderId,folderName)){
 			responseObject.setCode(ResponseConstant.SUCCESS_CODE);
 			responseObject.setMsg(ResponseConstant.SUCCESS_MSG_BASIC);
@@ -104,7 +113,7 @@ public class FolderResource {
 		RestResponseObject responseObject = new RestResponseObject();
 		if(StringUtils.isEmpty(email)){
 			responseObject.setCode(ResponseConstant.ERROR_CODE);
-			responseObject.setMsg(Constant.PARAM_NOT_NULL);
+			responseObject.setMsg(Constant.PARAM_ERROR);
 		}
 		List<FolderDto> folderDtos =  folderService.getAll(email);
 		responseObject.setData(JSON.toJSONString(folderDtos));
@@ -121,7 +130,7 @@ public class FolderResource {
 		RestResponseObject responseObject = new RestResponseObject();
 		if(StringUtils.isEmpty(folderId)){
 			responseObject.setCode(ResponseConstant.ERROR_CODE);
-			responseObject.setMsg(Constant.PARAM_NOT_NULL);
+			responseObject.setMsg(Constant.PARAM_ERROR);
 		}
 		FolderDto folderDto =  folderService.get(folderId);
 		responseObject.setData(folderDto);

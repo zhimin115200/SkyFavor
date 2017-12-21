@@ -56,6 +56,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public void resetPass(String email, String password) throws UserException {
+		if(isExist(email)){
+			SF_User user = userDao.get(email);
+			user.setPassword(password);
+			if(!userDao.modify(user)){
+				throw new UserException(Constant.CREATE_ERROR);
+			}
+		}else{
+			throw new UserException(Constant.ACCOUNT_NOT_EXIST);
+		}
+	}
+
+	@Override
 	public UserDto getUser(String email) {
 		SF_User user = userDao.get(email);
 		if(user!=null){
